@@ -1,0 +1,17 @@
+<template name="nav">
+  <div>
+    <ul>
+        <li>Home</li>
+        <li>Admin</li>
+
+        {{#if currentUser}}
+            {{> logout}}
+        {{else}}
+            {{> login}}
+            {{> register}}
+        {{/if}}
+
+        {{> passwordRecovery}}
+    </ul>
+  </div>
+</template>

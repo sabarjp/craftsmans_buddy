@@ -1,0 +1,83 @@
+<template name="login">
+    <form id="login-form" action="action">
+        <div>
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" />
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" />
+
+            {{#if loginError}}
+                <span id="login-email-message">{{loginError}}</span>
+            {{/if}}
+
+            <input type="submit" id="login-button" value="Sign in" />
+        </div>
+    </form>
+</template>
+
+<template name="logout">
+    <span>{{currentUserName}}</span>
+
+    <form id="logout-form" action="action">
+        <div>
+            <input type="submit" id="logout-button" value="Logout" />
+        </div>
+    </form>
+</template>
+
+<template name="register">
+    <form id="register-form" action="action">
+        <div>
+            <label for="account-email">E-mail</label>
+            <input type="email" id="account-email" />
+
+            {{#if registerEmailError}}
+                <span id="account-email-message">{{registerEmailError}}</span>
+            {{/if}}
+
+            <label for="account-password">Password</label>
+            <input type="password" id="account-password" />
+
+            {{#if registerPasswordError}}
+                <span id="account-email-message">{{registerPasswordError}}</span>
+            {{/if}}
+
+            <input type="submit" id="create-acount" value="Create an account" />
+        </div>
+    </form>
+</template>
+
+<template name="passwordRecovery">
+    {{#if resetPasswordToken}}
+        <form id="new-password" action="action">
+            <div>
+                <label for="new-password-password">New password</label>
+                <input type="text" id="new-password-password" />
+
+                {{#if passwordRecoveryNewPasswordError}}
+                    <span id="new-password-password-message">{{passwordRecoveryNewPasswordError}}</span>
+                {{/if}}
+
+                <input type="submit" value="Change password" />
+            </div>
+        </form>
+    {{else}}
+        <form id="recovery-form" action="action">
+            <div>
+                {{#if passwordRecoveryMessage}}
+                    <span id="recovery-message">{{passwordRecoveryMessage}}</span>
+                {{else}}
+                    <label for="recovery-email">E-mail</label>
+                    <input type="text" id="recovery-email" />
+
+                    {{#if passwordRecoveryEmailError}}
+                        <span id="recovery-email-message">{{passwordRecoveryEmailError}}</span>
+                    {{/if}}
+
+                    <input type="submit" value="Send Reset Instructions" />
+                {{/if}}
+            </div>
+        </form>
+    {{/if}}
+</template>
