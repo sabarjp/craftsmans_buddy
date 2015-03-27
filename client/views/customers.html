@@ -1,6 +1,7 @@
 <template name="customersMain">
     <head>
         <title>Manage customers</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
@@ -25,7 +26,7 @@
     <h2>Add new customer</h2>
     <form class="input-form" id="customer-add-form" action="action">
         <div>
-            <p>{{addCustomerError}}</p>
+            {{> validationErrors collectionName="customers" errorMessage="There was a problem creating the new customer."}}
 
             <div class="form-field">
                 <label for="first-name">*First name</label>
@@ -73,12 +74,12 @@
             </div>
 
             <div class="form-field">
-                <label for="phone-number">*Phone number</label>
+                <label for="phone-number">Phone number</label>
                 <input type="text" id="phone-number" name="phoneNumber" placeholder="Phone number"/>
             </div>
 
             <div class="form-field">
-                <label for="e-mail">*E-mail</label>
+                <label for="e-mail">E-mail</label>
                 <input type="text" id="e-mail" name="email" placeholder="E-mail address"/>
             </div>
 

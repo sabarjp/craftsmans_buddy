@@ -1,9 +1,9 @@
 Template.login.events({
-    'submit #login-form': function(event, target){
+    'submit #login-form': function(event, template){
         event.preventDefault();
 
-        var email = trimInput(target.find('#login-email').value);
-        var password = target.find('#login-password').value;
+        var email = trimInput(template.find('#login-email').value);
+        var password = template.find('#login-password').value;
 
         Meteor.loginWithPassword(email, password, function(error){
             if (error){
@@ -25,7 +25,7 @@ Template.login.helpers({
 });
 
 Template.logout.events({
-    'submit #logout-form': function(event, target){
+    'submit #logout-form': function(event){
         event.preventDefault();
 
         Meteor.logout();
@@ -41,11 +41,11 @@ Template.logout.helpers({
 });
 
 Template.register.events({
-    'submit #register-form': function(event, target){
+    'submit #register-form': function(event, template){
         event.preventDefault();
 
-        var email = trimInput(target.find('#account-email').value);
-        var password = target.find('#account-password').value;
+        var email = trimInput(template.find('#account-email').value);
+        var password = template.find('#account-password').value;
 
         if (!isEmail(email)){
             Session.set('registerEmailError', 'E-mail not valid!');
@@ -90,10 +90,10 @@ Template.register.helpers({
 });
 
 Template.passwordRecovery.events({
-    'submit #recovery-form': function(event, target){
+    'submit #recovery-form': function(event, template){
         event.preventDefault();
 
-        var email = trimInput(target.find('#recovery-email').value);
+        var email = trimInput(template.find('#recovery-email').value);
 
         if (!isEmail(email)){
             Session.set('passwordRecoveryEmailError', 'E-mail not valid!');
@@ -112,10 +112,10 @@ Template.passwordRecovery.events({
         return false;
     },
 
-    'submit #new-password': function(event, target){
+    'submit #new-password': function(event, template){
         event.preventDefault();
 
-        var password = target.find('#new-password-password').value;
+        var password = template.find('#new-password-password').value;
 
         if(!isValidPasswordLength(password)){
             Session.set('passwordRecoveryNewPasswordError', 'Your password is too short!');

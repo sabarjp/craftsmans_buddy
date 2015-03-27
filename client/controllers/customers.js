@@ -1,9 +1,7 @@
 Meteor.subscribe("customers");
 
-Customers = new Mongo.Collection("customers");
-
 Template.customersMain.events({
-    'click #customer-add-button': function(event, target){
+    'click #customer-add-button': function(){
         Session.set('showCustomerAddArea', true);
 
         return false;
@@ -21,21 +19,21 @@ Template.customersMain.helpers({
 });
 
 Template.customerAddForm.events({
-    'submit #customer-add-form': function(event, target){
+    'submit #customer-add-form': function(event, template){
         var newCustomer = {
-            firstName: target.find('#first-name').value,
-            lastName: target.find('#last-name').value,
-            suffix: target.find('#suffix').value,
-            country: target.find('#country').value,
-            streetAddress: target.find('#street-address').value,
-            apartmentNumber: target.find('#apartment-number').value,
-            city: target.find('#city').value,
-            state: target.find('#state').value,
-            zipCode: target.find('#zip-code').value,
-            phoneNumber: target.find('#phone-number').value,
-            email: target.find('#e-mail').value,
-            webAddress: target.find('#web-address').value,
-            notes: target.find('#notes').value
+            firstName: template.find('#first-name').value,
+            lastName: template.find('#last-name').value,
+            suffix: template.find('#suffix').value,
+            country: template.find('#country').value,
+            streetAddress: template.find('#street-address').value,
+            apartmentNumber: template.find('#apartment-number').value,
+            city: template.find('#city').value,
+            state: template.find('#state').value,
+            zipCode: template.find('#zip-code').value,
+            phoneNumber: template.find('#phone-number').value,
+            email: template.find('#e-mail').value,
+            webAddress: template.find('#web-address').value,
+            notes: template.find('#notes').value
         };
 
         Meteor.call("addCustomer", newCustomer, function(error){
@@ -43,12 +41,13 @@ Template.customerAddForm.events({
                 // error with the form
                 if(error.error === "logged-out"){
                     // TODO: redirect to log in page
-                } else if (error.error === "required-field"){
-                    Session.set('addCustomerError', error.reason);
+                } else {
+                    // unknown error!
+                    console.log(error.reason);
                 }
             } else {
                 // clear form
-                target.$('form')[0].reset();
+                template.$('form')[0].reset();
                 Session.set('addCustomerError', null);
             }
         });
@@ -56,10 +55,11 @@ Template.customerAddForm.events({
         return false;
     },
 
-    'click #cancel-button': function(event, target){
+    'click #cancel-button': function(event, template){
         // clear form
-        target.$('form')[0].reset();
+        template.$('form')[0].reset();
         Session.set('addCustomerError', null);
+        Customers.simpleSchema().namedContext().resetValidation();
 
         Session.set('showCustomerAddArea', false);
 
