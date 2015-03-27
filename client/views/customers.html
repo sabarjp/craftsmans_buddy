@@ -1,0 +1,99 @@
+<template name="customersMain">
+    <head>
+        <title>Manage customers</title>
+    </head>
+
+    <body>
+        {{#if isCustomerBeingAdded}}
+            {{> customerAddForm}}
+        {{else}}
+            <button id="customer-add-button">Add customer</button>
+        {{/if}}
+
+        <h2>Customer listing</h2>
+        {{#each customers}}
+            {{> customer}}
+        {{/each}}
+    </body>
+</template>
+
+<template name="customer">
+    <li>{{firstName}} {{lastName}}</li>
+</template>
+
+<template name="customerAddForm">
+    <h2>Add new customer</h2>
+    <form class="input-form" id="customer-add-form" action="action">
+        <div>
+            <p>{{addCustomerError}}</p>
+
+            <div class="form-field">
+                <label for="first-name">*First name</label>
+                <input type="text" id="first-name" name="firstName" placeholder="First name"/>
+            </div>
+
+            <div class="form-field">
+                <label for="last-name">*Last name</label>
+                <input type="text" id="last-name" name="lastName" placeholder="Last name"/>
+            </div>
+
+            <div class="form-field">
+                <label for="suffix">Suffix</label>
+                <input type="text" id="suffix" name="suffix" placeholder="Suffix"/>
+            </div>
+
+            <div class="form-field">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" placeholder="Country"/>
+            </div>
+
+            <div class="form-field">
+                <label for="street-address">Street address</label>
+                <input type="text" id="street-address" name="streetAddress" placeholder="Street address"/>
+            </div>
+
+            <div class="form-field">
+                <label for="apartment-number">Apartment number</label>
+                <input type="text" id="apartment-number" name="apartmentNumber" placeholder="Apt. #"/>
+            </div>
+
+            <div class="form-field">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" placeholder="City"/>
+            </div>
+
+            <div class="form-field">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="State"/>
+            </div>
+
+            <div class="form-field">
+                <label for="zip-code">Zip code</label>
+                <input type="text" id="zip-code" name="zipCode" placeholder="Zip code"/>
+            </div>
+
+            <div class="form-field">
+                <label for="phone-number">*Phone number</label>
+                <input type="text" id="phone-number" name="phoneNumber" placeholder="Phone number"/>
+            </div>
+
+            <div class="form-field">
+                <label for="e-mail">*E-mail</label>
+                <input type="text" id="e-mail" name="email" placeholder="E-mail address"/>
+            </div>
+
+            <div class="form-field">
+                <label for="web-address">Web address</label>
+                <input type="text" id="web-address" name="webAddress" placeholder="Web address"/>
+            </div>
+
+            <div class="form-field">
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes" placeholder="Notes about this customer"></textarea>
+            </div>
+
+            <input type="submit" id="submit-button" value="Add" />
+            <button id="cancel-button">Cancel</button>
+        </div>
+    </form>
+</template>

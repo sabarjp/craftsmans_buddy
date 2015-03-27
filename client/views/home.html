@@ -1,0 +1,18 @@
+<template name="home">
+    <head>
+      <title>Craftsman Buddy</title>
+    </head>
+
+    <body>
+        {{> nav}}
+
+        <h1>Welcome to $projectName!</h1>
+
+        {{#if currentUser}}
+            <h2>Choose an action below</h2>
+
+            <a id="manage-products-link" href="{{pathFor route='projects'}}">Manage projects</a>
+            <a id="manage-customers-link" href="{{pathFor route='customers'}}">Manage customers</a>
+        {{/if}}
+    </body>
+</template>
