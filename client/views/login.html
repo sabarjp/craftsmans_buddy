@@ -1,17 +1,30 @@
 <template name="login">
-    <form id="login-form" action="action">
-        <div>
+    <h2>Login</h2>
+
+    {{#if loginError}}
+        <div class="ui error attached message">
+            <div class="header">
+                There was a small problem.
+            </div>
+            <ul class="list">
+                <li class="errors">{{loginError}}</li>
+            </ul>
+        </div>
+    {{/if}}
+
+    <form class="ui form attached fluid segment" id="login-form" action="action">
+        <div class="field">
             <label for="login-email">E-mail</label>
             <input type="email" id="login-email" />
+        </div>
 
+        <div class="field">
             <label for="login-password">Password</label>
             <input type="password" id="login-password" />
+        </div>
 
-            {{#if loginError}}
-                <span id="login-email-message">{{loginError}}</span>
-            {{/if}}
-
-            <input type="submit" id="login-button" value="Sign in" />
+        <div class="field">
+            <input type="submit" id="login-button" class="ui button" value="Sign in" />
         </div>
     </form>
 </template>
@@ -19,65 +32,81 @@
 <template name="logout">
     <span>{{currentUserName}}</span>
 
-    <form id="logout-form" action="action">
-        <div>
-            <input type="submit" id="logout-button" value="Logout" />
+    <form class="ui form" id="logout-form" action="action">
+        <div class="field">
+            <input type="submit" id="logout-button" class="ui button" value="Logout" />
         </div>
     </form>
 </template>
 
 <template name="register">
-    <form id="register-form" action="action">
-        <div>
+    <h2>Register</h2>
+    <form class="ui form attached fluid segment" id="register-form" action="action">
+        <div class="field">
             <label for="account-email">E-mail</label>
             <input type="email" id="account-email" />
 
             {{#if registerEmailError}}
-                <span id="account-email-message">{{registerEmailError}}</span>
+                <div class="ui pointing red label">
+                    {{registerEmailError}}
+                </div>
             {{/if}}
-
+        </div>
+        <div class="field">
             <label for="account-password">Password</label>
             <input type="password" id="account-password" />
 
             {{#if registerPasswordError}}
-                <span id="account-email-message">{{registerPasswordError}}</span>
+                <div class="ui pointing red label">
+                    {{registerPasswordError}}
+                </div>
             {{/if}}
-
-            <input type="submit" id="create-acount" value="Create an account" />
+        </div>
+        <div class="field">
+            <input type="submit" id="create-acount" class="ui button" value="Create an account" />
         </div>
     </form>
 </template>
 
 <template name="passwordRecovery">
+    <h2>Reset password</h2>
     {{#if resetPasswordToken}}
-        <form id="new-password" action="action">
-            <div>
+        <form class="ui form attached fluid segment" id="new-password" action="action">
+            <div class="field">
                 <label for="new-password-password">New password</label>
                 <input type="text" id="new-password-password" />
 
                 {{#if passwordRecoveryNewPasswordError}}
-                    <span id="new-password-password-message">{{passwordRecoveryNewPasswordError}}</span>
+                    <div class="ui pointing red label">
+                        {{passwordRecoveryNewPasswordError}}
+                    </div>
                 {{/if}}
-
-                <input type="submit" value="Change password" />
+            </div>
+            <div class="field">
+                <input type="submit" class="ui button" value="Change password" />
             </div>
         </form>
     {{else}}
-        <form id="recovery-form" action="action">
-            <div>
-                {{#if passwordRecoveryMessage}}
+        <form class="ui form attached fluid segment" id="recovery-form" action="action">
+            {{#if passwordRecoveryMessage}}
+                <div class="field">
                     <span id="recovery-message">{{passwordRecoveryMessage}}</span>
-                {{else}}
+                </div>
+            {{else}}
+                <div class="field">
                     <label for="recovery-email">E-mail</label>
                     <input type="text" id="recovery-email" />
 
                     {{#if passwordRecoveryEmailError}}
-                        <span id="recovery-email-message">{{passwordRecoveryEmailError}}</span>
+                        <div class="ui pointing red label">
+                            {{passwordRecoveryEmailError}}
+                        </div>
                     {{/if}}
-
-                    <input type="submit" value="Send Reset Instructions" />
-                {{/if}}
-            </div>
+                </div>
+                <div class="field">
+                    <input type="submit" class="ui button" value="Send Reset Instructions" />
+                </div>
+            {{/if}}
         </form>
     {{/if}}
 </template>

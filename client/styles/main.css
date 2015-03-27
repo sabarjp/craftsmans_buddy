@@ -1,7 +1,17 @@
 /* CSS declarations go here */
+
+.pusher{
+    padding-top: 40px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*
 body{
     font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
     font-size: 14px;
+
     background-color: #444;
     color: #ddd;
 
@@ -33,6 +43,7 @@ form{
     display: block;
 }
 
+
 input[type="text"], 
 input[type="password"],
 textarea{
@@ -47,6 +58,7 @@ textarea{
 
     transition: background-color 0.4s, color 0.4s;
 }
+
 
 input[type="text"]:hover, 
 input[type="password"]:hover,
@@ -90,3 +102,4 @@ button:hover{
     background-color: #ffd900;
     color: #000;
 }
+*/

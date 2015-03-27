@@ -18,6 +18,52 @@ Template.customersMain.helpers({
     }
 });
 
+Template.customer.events({
+    'click .customer-modify': function(event, template){
+        //show edit and delete
+        $(event.target).hide();
+        template.$('.customer-modify-group').show();
+    },
+
+    'click .customer-delete': function(event, template){
+        // confirm the deletion
+        $(event.target).hide();
+        template.$('.customer-edit').hide();
+        template.$('.customer-confirm-delete-group').show();
+    },
+
+    'click .customer-cancel-delete': function(event, template){
+        template.$('.customer-confirm-delete-group').hide();
+        template.$('.customer-edit').show();
+        template.$('.customer-delete').show();
+    },
+
+    'click .customer-confirm-delete': function(event, template){
+        template.$('.customer-confirm-delete-group').hide();
+        template.$('.customer-edit').show();
+        template.$('.customer-delete').show();
+
+        Meteor.call("removeCustomer", this._id, function(error){
+            if(error !== undefined){
+                // this is bad
+                console.log(error.reason);
+            }
+        });
+
+        return false;
+    },
+});
+
+Template.customer.helpers({
+    showConfirmDelete: function(){
+        return Session.get('showConfirmDelete');
+    }
+});
+
+Template.customerAddForm.rendered = function(){
+    $('.ui.dropdown').dropdown();
+};
+
 Template.customerAddForm.events({
     'submit #customer-add-form': function(event, template){
         var newCustomer = {
@@ -38,13 +84,8 @@ Template.customerAddForm.events({
 
         Meteor.call("addCustomer", newCustomer, function(error){
             if(error !== undefined){
-                // error with the form
-                if(error.error === "logged-out"){
-                    // TODO: redirect to log in page
-                } else {
-                    // unknown error!
-                    console.log(error.reason);
-                }
+                // this is bad
+                console.log(error.reason);
             } else {
                 // clear form
                 template.$('form')[0].reset();

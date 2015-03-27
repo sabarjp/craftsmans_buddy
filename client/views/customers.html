@@ -8,93 +8,133 @@
         {{#if isCustomerBeingAdded}}
             {{> customerAddForm}}
         {{else}}
-            <button id="customer-add-button">Add customer</button>
+            <button id="customer-add-button" class="ui primary button">Add customer</button>
         {{/if}}
 
         <h2>Customer listing</h2>
-        {{#each customers}}
-            {{> customer}}
-        {{/each}}
+        <div class="ui two column grid">
+            {{#each customers}}
+                {{> customer}}
+            {{/each}}
+        </div>
     </body>
 </template>
 
 <template name="customer">
-    <li>{{firstName}} {{lastName}}</li>
+    <div class="column">{{firstName}} {{lastName}}</div>
+    <div class="column">
+        <button class="customer-modify ui button">Modify</button>
+
+        <div class="customer-modify-group ui buttons" style="display:none;">
+            <button class="customer-edit ui blue button">Edit</button>
+            <button class="customer-delete ui yellow button">Delete</button>
+        </div>
+
+        <div class="customer-confirm-delete-group ui buttons" style="display:none;">
+            <button class="customer-confirm-delete ui red button">Delete</button>
+            <div class="or"></div>
+            <button class="customer-cancel-delete ui button">Cancel</button>
+        </div>
+    </div>
 </template>
 
 <template name="customerAddForm">
     <h2>Add new customer</h2>
-    <form class="input-form" id="customer-add-form" action="action">
-        <div>
-            {{> validationErrors collectionName="customers" errorMessage="There was a problem creating the new customer."}}
 
-            <div class="form-field">
-                <label for="first-name">*First name</label>
-                <input type="text" id="first-name" name="firstName" placeholder="First name"/>
+    {{> validationErrors collectionName="customers" errorMessage="There was a problem creating the new customer."}}
+
+    <form class="ui form" id="customer-add-form" action="action">
+        <div class="field">
+            <label for="first-name">*First name</label>
+            <input type="text" id="first-name" name="firstName" placeholder="First name"/>
+        </div>
+
+        <div class="field">
+            <label for="last-name">*Last name</label>
+            <input type="text" id="last-name" name="lastName" placeholder="Last name"/>
+        </div>
+
+        <div class="field">
+            <label for="suffix">Suffix</label>
+            <input type="text" id="suffix" name="suffix" placeholder="Suffix"/>
+        </div>
+
+        <div class="field">
+            <label for="country">Country</label>
+            <div class="ui fluid search selection dropdown">
+                <input type="hidden" id="country" name="country" />
+                <i class="dropdown icon"></i>
+                <div class="default text">Select country</div>
+                <div class="menu">
+                    <div class="item" data-value="us">
+                        <i class="us flag"></i>United States
+                    </div>
+                    <div class="item" data-value="ad">
+                        <i class="ad flag"></i>Andorra
+                    </div>
+                    <div class="item" data-value="ae">
+                        <i class="ae flag"></i>United Arab Emirates
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="form-field">
-                <label for="last-name">*Last name</label>
-                <input type="text" id="last-name" name="lastName" placeholder="Last name"/>
-            </div>
+        <div class="field">
+            <select class="ui search dropdown">
+                <option value="">State</option>
+                <option value="AL">Alabama</option>
+                <option value="TX">Texas</option>
+            </select>
+        </div>
 
-            <div class="form-field">
-                <label for="suffix">Suffix</label>
-                <input type="text" id="suffix" name="suffix" placeholder="Suffix"/>
-            </div>
+        <div class="field">
+            <label for="street-address">Street address</label>
+            <input type="text" id="street-address" name="streetAddress" placeholder="Street address"/>
+        </div>
 
-            <div class="form-field">
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" placeholder="Country"/>
-            </div>
+        <div class="field">
+            <label for="apartment-number">Apartment number</label>
+            <input type="text" id="apartment-number" name="apartmentNumber" placeholder="Apt. #"/>
+        </div>
 
-            <div class="form-field">
-                <label for="street-address">Street address</label>
-                <input type="text" id="street-address" name="streetAddress" placeholder="Street address"/>
-            </div>
+        <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="City"/>
+        </div>
 
-            <div class="form-field">
-                <label for="apartment-number">Apartment number</label>
-                <input type="text" id="apartment-number" name="apartmentNumber" placeholder="Apt. #"/>
-            </div>
+        <div class="field">
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" placeholder="State"/>
+        </div>
 
-            <div class="form-field">
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" placeholder="City"/>
-            </div>
+        <div class="field">
+            <label for="zip-code">Zip code</label>
+            <input type="text" id="zip-code" name="zipCode" placeholder="Zip code"/>
+        </div>
 
-            <div class="form-field">
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" placeholder="State"/>
-            </div>
+        <div class="field">
+            <label for="phone-number">Phone number</label>
+            <input type="text" id="phone-number" name="phoneNumber" placeholder="Phone number"/>
+        </div>
 
-            <div class="form-field">
-                <label for="zip-code">Zip code</label>
-                <input type="text" id="zip-code" name="zipCode" placeholder="Zip code"/>
-            </div>
+        <div class="field">
+            <label for="e-mail">E-mail</label>
+            <input type="text" id="e-mail" name="email" placeholder="E-mail address"/>
+        </div>
 
-            <div class="form-field">
-                <label for="phone-number">Phone number</label>
-                <input type="text" id="phone-number" name="phoneNumber" placeholder="Phone number"/>
-            </div>
+        <div class="field">
+            <label for="web-address">Web address</label>
+            <input type="text" id="web-address" name="webAddress" placeholder="Web address"/>
+        </div>
 
-            <div class="form-field">
-                <label for="e-mail">E-mail</label>
-                <input type="text" id="e-mail" name="email" placeholder="E-mail address"/>
-            </div>
+        <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" placeholder="Notes about this customer"></textarea>
+        </div>
 
-            <div class="form-field">
-                <label for="web-address">Web address</label>
-                <input type="text" id="web-address" name="webAddress" placeholder="Web address"/>
-            </div>
-
-            <div class="form-field">
-                <label for="notes">Notes</label>
-                <textarea id="notes" name="notes" placeholder="Notes about this customer"></textarea>
-            </div>
-
-            <input type="submit" id="submit-button" value="Add" />
-            <button id="cancel-button">Cancel</button>
+        <div class="field">
+            <input type="submit" id="submit-button" class="ui primary button" value="Add" />
+            <button id="cancel-button" class="ui secondary button">Cancel</button>
         </div>
     </form>
 </template>

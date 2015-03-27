@@ -1,17 +1,21 @@
 <template name="nav">
-  <div>
-    <ul>
-        <li>Home</li>
-        <li>Admin</li>
-
-        {{#if currentUser}}
-            {{> logout}}
-        {{else}}
-            {{> login}}
-            {{> register}}
-        {{/if}}
-
-        {{> passwordRecovery}}
-    </ul>
+  <div class="ui top inverted fixed menu">
+    <a class="active item" id="menu">
+        <i class="bars icon"></i> Menu
+    </a>
   </div>
+</template>
+
+<template name="sidebar">
+    <div class="ui left vertical inverted labeled icon sidebar menu" id="sidebar">
+        <a class="item">
+            <i class="home icon"></i> Home
+        </a>
+        <a class="item">
+            <i class="users icon"></i> Customers
+        </a>
+        <a class="item">
+            <i class="wrench icon"></i> Projects
+        </a>
+    </div>
 </template>
