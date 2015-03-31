@@ -1,6 +1,7 @@
 <template name="home">
     <head>
       <title>Craftsman Buddy</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
@@ -9,22 +10,6 @@
 
         <div class="pusher">
             <h1>Welcome to $projectName!</h1>
-
-            {{#if currentUser}}
-                {{> logout}}
-            {{else}}
-                {{> login}}
-                {{> register}}
-            {{/if}}
-
-            {{> passwordRecovery}}
-
-            {{#if currentUser}}
-                <h2>Choose an action below</h2>
-
-                <a id="manage-products-link" href="{{pathFor route='projects'}}">Manage projects</a>
-                <a id="manage-customers-link" href="{{pathFor route='customers'}}">Manage customers</a>
-            {{/if}}
         </div>
     </body>
 </template>

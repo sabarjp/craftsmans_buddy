@@ -3,19 +3,38 @@
     <a class="active item" id="menu">
         <i class="bars icon"></i> Menu
     </a>
+    <div class="right menu">
+        {{#if currentUser}}
+            {{> logout}}
+        {{else}}
+            <a class="item" href="{{pathFor route='login'}}">
+                Login
+            </a>
+            <a class="item" href="{{pathFor route='signup'}}">
+                Sign up
+            </a>
+        {{/if}}
+    </div>
   </div>
 </template>
 
 <template name="sidebar">
     <div class="ui left vertical inverted labeled icon sidebar menu" id="sidebar">
-        <a class="item">
+        <a class="item" href="/">
             <i class="home icon"></i> Home
         </a>
-        <a class="item">
-            <i class="users icon"></i> Customers
-        </a>
-        <a class="item">
-            <i class="wrench icon"></i> Projects
-        </a>
+        
+        {{#if currentUser}}
+            <a class="item" href="{{pathFor route='customers'}}">
+                <i class="users icon"></i> Customers
+            </a>
+            <a class="item" href="{{pathFor route='projects'}}">
+                <i class="wrench icon"></i> Projects
+            </a>
+        {{else}}
+            <a class="item" href="{{pathFor route='login'}}">
+                <i class="user icon"></i> Login
+            </a>
+        {{/if}}
     </div>
 </template>
