@@ -25,23 +25,25 @@ Template.customer.events({
         template.$('.customer-modify-group').show();
     },
 
+    'click .customer-cancel-modify': function(event, template){
+        template.$('.customer-modify-group').hide();
+        template.$('.customer-modify').show();
+    },
+
     'click .customer-delete': function(event, template){
         // confirm the deletion
-        $(event.target).hide();
-        template.$('.customer-edit').hide();
+        template.$('.customer-modify-group').hide();
         template.$('.customer-confirm-delete-group').show();
     },
 
     'click .customer-cancel-delete': function(event, template){
         template.$('.customer-confirm-delete-group').hide();
-        template.$('.customer-edit').show();
-        template.$('.customer-delete').show();
+        template.$('.customer-modify-group').show();
     },
 
     'click .customer-confirm-delete': function(event, template){
         template.$('.customer-confirm-delete-group').hide();
-        template.$('.customer-edit').show();
-        template.$('.customer-delete').show();
+        template.$('.customer-modify-group').show();
 
         Meteor.call("removeCustomer", this._id, function(error){
             if(error !== undefined){
